@@ -1,6 +1,8 @@
 tags:
-  - a tag
+  - Iterable
+  - Iterator
+  - Web crawler
 languages:
-  - a language
+  - Java
 resources: 
-  - 0
+  - 3
