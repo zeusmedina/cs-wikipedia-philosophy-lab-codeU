@@ -71,7 +71,7 @@ public class WikiNodeIterable implements Iterable<Node> {
 }
 ```
 
-The inner class, ``, does all the real work:
+The inner class, `WikiNodeIterator`, does all the real work:
 
 ```
 	private class WikiNodeIterator implements Iterator<Node> {
