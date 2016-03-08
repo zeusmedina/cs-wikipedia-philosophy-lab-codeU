@@ -21,7 +21,7 @@ In the subdirectory `javacs-lab05/src/com/flatironschool/javacs` you'll find the
 
 2.  `WikiNodeIterable.java` contains an `Iterable` class for traversing a DOM tree.  We'll explain this code in the next section.
 
-3.  `WikiFetcher.java` contains a utility class that uses jsoup to download pages from Wikipedia.  To help you comply with Wikipedia's terms of service, this class limits how fast you can download pages; if you request more than one page per second, it sleeps before downloading.
+3.  `WikiFetcher.java` contains a utility class that uses jsoup to download pages from Wikipedia.  To help you comply with Wikipedia's terms of service, this class limits how fast you can download pages; if you request more than one page per second, it sleeps before downloading the next page.
 
 4.  `WikiPhilosophy.java` contains an outline of the code you will write for this lab.  We'll walk you through it below.
 
@@ -49,9 +49,9 @@ Where `root` is the root of the tree we want to traverse and `visit` is a method
 
 The implementation of WikiNodeIterable follows a conventional formula:
 
-1. The constructor takes and stores a reference to the root `Node`. 
+1. The constructor takes and stores a reference to the root `Node`.
 
-2. The `iterator method creates a returns an `Iterator` object.
+2. The `iterator` method creates a returns an `Iterator` object.
 
 Here's what it looks like:
 
@@ -75,14 +75,14 @@ The inner class, `WikiNodeIterator`, does all the real work:
 
 ```
 	private class WikiNodeIterator implements Iterator<Node> {
-		
+
 		Deque<Node> stack;
 
 		public WikiNodeIterator(Node node) {
 			stack = new ArrayDeque<Node>();
 		    stack.push(root);
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return !stack.isEmpty();
@@ -93,7 +93,7 @@ The inner class, `WikiNodeIterator`, does all the real work:
 			if (stack.isEmpty()) {
 				throw new NoSuchElementException();
 			}
-			
+
 			Node node = stack.pop();
 			List<Node> nodes = new ArrayList<Node>(node.childNodes());
 			Collections.reverse(nodes);
@@ -120,7 +120,7 @@ When you write a Web crawler, it is easy to download too many pages too fast, wh
 
 1.  It encapsulates the code we demonstrated in the previous README for downloading pages from Wikipedia, parsing the HTML, and selecting the content text.
 
-2.  It measures the time between requests and, if don't leave enough time between requests, it sleeps until a reasonable interval has elapsed.  Be default, the interval is one second.
+2.  It measures the time between requests and, if we don't leave enough time between requests, it sleeps until a reasonable interval has elapsed.  By default, the interval is one second.
 
 Here's the definition of `WikiFetcher`
 
@@ -131,14 +131,14 @@ public class WikiFetcher {
 
 	/**
 	 * Fetches and parses a URL string, returning a list of paragraph elements.
-	 * 
-	 * @param url 
+	 *
+	 * @param url
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public Elements fetchWikipedia(String url) throws IOException {
 		sleepIfNeeded();
-		
+
 		Connection conn = Jsoup.connect(url);
 		Document doc = conn.get();
 		Element content = doc.getElementById("mw-content-text");
@@ -164,14 +164,14 @@ public class WikiFetcher {
 ```
 
 The only public method is `fetchWikipedia`, which takes a URL as a String and returns an `Elements` collection that contains one DOM elements for each paragraph in the content text.  This code should look familiar.
-  
+
 The new code is in `sleepIfNeeded`, which checks the time since the last request and sleeps if the elapsed time is less than `minInterval`, which is in milliseconds.
 
 That's all there is to `WikiFetcher`.  Here's an example that demonstrates how it's used:
 
 ```java
 	WikiFetcher wf = new WikiFetcher();
-	
+
 	for (String url: urlList) {
         Elements paragraphs = wf.fetchWikipedia(url);
         processParagraphs(paragraphs);
@@ -217,9 +217,9 @@ If you feel like you have enough information to get started, go ahead.  Or you m
 
 1.  As you traverse the tree, the two kinds of `Node` you will need to deal with are `TextNode` and `Element`.  If you find an `Element`, you will probably have to typecast it to access the tag and other information.
 
-2.  When you find an `Element` that contains a link, you can check whether it is in italics by following parent links up the tree.  If one of there is an `i` or `em` tag in the parent chain, the link is in italics.
+2.  When you find an `Element` that contains a link, you can check whether it is in italics by following parent links up the tree.  If there is an `i` or `em` tag in the parent chain, the link is in italics.
 
-3.  To check whether a link it in parentheses, you will have to scan through the text as you traverse the tree and keep track of opening and closing parentheses (ideally your solution should be able to handle nested parentheses (like this)).
+3.  To check whether a link is in parentheses, you will have to scan through the text as you traverse the tree and keep track of opening and closing parentheses (ideally your solution should be able to handle nested parentheses (like this)).
 
 4.  If you start from [the Java page](https://en.wikipedia.org/wiki/Java_(programming_language)), you should get to [Philosophy](https://en.wikipedia.org/wiki/Philosophy) after following seven links (unless something has changed since we ran the code).
 
@@ -233,7 +233,3 @@ Ok, that's all the help you're going to get from us.  Now it's up to you.  Have 
 [Iterable](https://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html): Java documentation.
 
 [Singleton pattern](https://en.wikipedia.org/wiki/Singleton_pattern): Wikipedia.
-
-
-
-
