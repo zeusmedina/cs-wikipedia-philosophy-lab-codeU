@@ -22,7 +22,7 @@ public class WikiParser {
 	
 	// the stack of open delimiters
 	// TODO: consider simplifying this by counting parentheses
-	public Deque<String> parenthesisStack;
+	private Deque<String> parenthesisStack;
 	
 
 	/**
@@ -178,7 +178,7 @@ public class WikiParser {
 		StringTokenizer st = new StringTokenizer(node.text(), " ()", true);
 		while (st.hasMoreTokens()) {
 		     String token = st.nextToken();
-		     System.out.print(token);
+		     // System.out.print(token);
 		     if (token.equals("(")) {
 		    	 parenthesisStack.push(token);
 		     }

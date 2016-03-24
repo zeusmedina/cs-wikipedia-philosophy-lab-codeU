@@ -28,19 +28,19 @@ public class WikiPhilosophy {
 	public static void main(String[] args) throws IOException {
 		
 		String destination = "https://en.wikipedia.org/wiki/Philosophy";
-		String source = "https://en.wikipedia.org/wiki/Java_(Programming_Language)";
+		String source = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 		
 		testConjecture(destination, source, 10);		
 	}
 
 	/**
-	 * Starts from given URL and follows first link until 
+	 * Starts from given URL and follows first link until it finds the destination or exceeds the limit.
 	 * 
 	 * @param destination
 	 * @param source
 	 * @throws IOException
 	 */
-	private static void testConjecture(String destination, String source, int limit) throws IOException {
+	public static void testConjecture(String destination, String source, int limit) throws IOException {
 		String url = source;
 		for (int i=0; i<limit; i++) {
 			if (visited.contains(url)) {
@@ -72,7 +72,7 @@ public class WikiPhilosophy {
 	 * @return the Element of the first link, or null.
 	 * @throws IOException
 	 */
-	private static Element getFirstValidLink(String url) throws IOException {
+	public static Element getFirstValidLink(String url) throws IOException {
 		print("Fetching %s...", url);
 		Elements paragraphs = wf.fetchWikipedia(url);
 		WikiParser wp = new WikiParser(paragraphs);
