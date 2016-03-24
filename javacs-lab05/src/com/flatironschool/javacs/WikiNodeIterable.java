@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 
 import org.jsoup.nodes.Node;
 
+
 /**
  * Performs a depth-first traversal of a jsoup Node.
  * 
@@ -74,7 +75,7 @@ public class WikiNodeIterable implements Iterable<Node> {
 			Node node = stack.pop();
 			//System.out.println(node);
 
-			// push the chidren onto the stack in reverse order
+			// push the children onto the stack in reverse order
 			List<Node> nodes = new ArrayList<Node>(node.childNodes());
 			Collections.reverse(nodes);
 			for (Node child: nodes) {
