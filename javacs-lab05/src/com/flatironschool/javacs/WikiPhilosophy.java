@@ -29,6 +29,8 @@ public class WikiPhilosophy {
 	 */
 	public static void main(String[] args) throws IOException {
 		
+        // some example code to get you started
+
 		String url = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 		Elements paragraphs = wf.fetchWikipedia(url);
 
@@ -39,6 +41,11 @@ public class WikiPhilosophy {
 			if (node instanceof TextNode) {
 				System.out.print(node);
 			}
-        }        
+        }
+
+        // the following throws an exception so the test fails
+        // until you update the code
+        String msg = "Complete this lab by adding your code and removing this statement.";
+        throw new UnsupportedOperationException(msg);
 	}
 }
