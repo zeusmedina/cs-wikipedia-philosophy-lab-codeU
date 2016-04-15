@@ -163,7 +163,7 @@ public class WikiFetcher {
 }
 ```
 
-The only public method is `fetchWikipedia`, which takes a URL as a String and returns an `Elements` collection that contains one DOM elements for each paragraph in the content text.  This code should look familiar.
+The only public method is `fetchWikipedia`, which takes a URL as a String and returns an `Elements` collection that contains one DOM element for each paragraph in the content text.  This code should look familiar.
 
 The new code is in `sleepIfNeeded`, which checks the time since the last request and sleeps if the elapsed time is less than `minInterval`, which is in milliseconds.
 
